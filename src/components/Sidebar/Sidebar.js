@@ -10,6 +10,7 @@ import {
   LibraryBooks as LibraryIcon,
   HelpOutline as FAQIcon,
   ArrowBack as ArrowBackIcon,
+  Dashboard as DashboardIcon,
 } from "@material-ui/icons";
 import { useTheme } from "@material-ui/styles";
 import { withRouter } from "react-router-dom";
@@ -30,6 +31,7 @@ import {
 } from "../../context/LayoutContext";
 
 const structure = [
+  { id: 99, label: "Cloud Dashboard", link: "/app/cloud", icon: <DashboardIcon /> },
   { id: 0, label: "Dashboard", link: "/app/dashboard", icon: <HomeIcon /> },
   {
     id: 1,
