@@ -2,6 +2,7 @@ import React from "react";
 import { CXContext } from "./cxContext";
 import { makeStyles } from "@material-ui/core/styles";
 import Card from "@material-ui/core/Card";
+import CardHeader from "@material-ui/core/CardHeader";
 import CardContent from "@material-ui/core/CardContent";
 
 // // styles
@@ -13,9 +14,9 @@ const useStyles = makeStyles((theme) => ({
     // paddingBottom: 0,
   },
   content: {
-    paddingBottom: 0,
-    color: "#eee",
-    backgroundColor: "#1e1e1e",    
+    paddingBottom: "0 !important",
+    // color: "#eee",
+    // backgroundColor: "#1e1e1e",    
   },
   header: {
     paddingLeft: 16,
@@ -51,16 +52,7 @@ export const WidgetTemplate = (props) => {
   }
 
   return (
-    // <div
-    //   ref={div}
-    //   // {...chartStyles}
-    // >
-
-    //  <ResetButton chart={chart} />
-    //  <label>{props.title}</label>
-    // </div>
-
-    <Card className={classes.root}>
+    <Card className={classes.root}>     
       <CardContent className={classes.content}>
         <div ref={div} class={props.chartType} />
       </CardContent>

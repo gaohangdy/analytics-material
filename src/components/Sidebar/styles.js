@@ -29,6 +29,7 @@ export default makeStyles(theme => ({
     }),
     overflowX: "hidden",
     width: theme.spacing(7) + 40,
+    // width: 48,
     [theme.breakpoints.down("sm")]: {
       width: drawerWidth,
     },

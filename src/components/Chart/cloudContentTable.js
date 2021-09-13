@@ -7,6 +7,7 @@ import { WidgetTemplate } from "./widgetTemplate";
 import { customSearch } from "./custom-search";
 
 const tableFunc = (divRef, ndx) => {
+  
   const nasdaqTable = dc.dataTable(divRef);
 
   const searchNameWidget = customSearch("#search-name");
@@ -136,18 +137,6 @@ const tableFunc = (divRef, ndx) => {
   return nasdaqTable;
 };
 
-// const style = css({
-//   "& tr": {
-//     "&:hover": {
-//       background: "#dddd",
-//     },
-//   },
-//   "& td": {
-//     // padding:rhythm(0.1),
-//     textAlign: "left",
-//     borderTop: "1px solid #ddd",
-//   },
-// });
 export const CloudContentTable = (props) => (
   <WidgetTemplate
     chartFunction={tableFunc}

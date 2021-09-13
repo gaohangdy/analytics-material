@@ -11,7 +11,8 @@ dc.wordcloudChart = function (parent, chartGroup) {
     _g = null,
     _padding = 5,
     _font = "Impact",
-    _relativeSize = 10,
+    // _relativeSize = 10,
+    _relativeSize = 5,
     _minX = 0,
     _minY = 0,
     _fill = d3.scaleOrdinal(d3.schemeCategory10); //d3.scale.category20();
@@ -34,17 +35,6 @@ dc.wordcloudChart = function (parent, chartGroup) {
       .attr("height", _chart.height())
       // .attr("height", 200)
       .attr("width", _chart.width())
-      // .append("g")
-      // .on("click", function (d) {
-      //   var filterfun = d.text
-      //     ? function (val) {
-      //         return new RegExp(d.text, "i").test(val);
-      //       }
-      //     : null;
-
-      //   _chart._dimension.filter(filterfun);
-      // })
-      // .on('click', _chart.onClick)
       .attr("cursor", "pointer");
   }
 
@@ -61,7 +51,7 @@ dc.wordcloudChart = function (parent, chartGroup) {
         return _chart.valueAccessor()(d) !== 0;
       });
 
-    var data = groups.map(function (d) {
+    var data = groups.map(function (d, i) {
       var value = _chart.valueAccessor()(d);
       var key = _chart.keyAccessor()(d);
       var title = _chart.title()(d);
@@ -71,6 +61,7 @@ dc.wordcloudChart = function (parent, chartGroup) {
         value: value,
         key: key,
         title: title,
+        fill: _fill(i),
       };
 
       return result;
@@ -82,6 +73,8 @@ dc.wordcloudChart = function (parent, chartGroup) {
     // .attr("alignment-baseline", "hanging")
     // .attr("x", 10)
     // .attr("y", 10);
+    _chart.width(parent.parentElement.offsetWidth - 24);
+    _chart.height(parent.parentElement.offsetHeight - 24);
 
     _cloud = cloud().size([_chart.width(), _chart.height()]);
 
@@ -93,52 +86,54 @@ dc.wordcloudChart = function (parent, chartGroup) {
       })
       .font(_chart.font())
       .fontSize(function (d) {
+        // return 16;
         return d.size;
       })
 
-      .on("word", ({size, x, y, rotate, text}) => {
+      .on("word", ({ size, x, y, rotate, text, fill }) => {
         _g.append("text")
           .attr("font-size", size)
           // .attr("font-size", "12px")
           .attr("transform", `translate(${x},${y}) rotate(${rotate})`)
           .text(text)
-          .classed("click-only-text", true)
-          .classed("word-default", true)
+          // .classed("click-only-text", true)
+          // .classed("word-default", true)
+          .style("fill", fill)          
           .on("mouseover", handleMouseOver)
           .on("mouseout", handleMouseOut)
           .on("click", handleClick);
-        
-          function handleMouseOver(d, i) {
-            d3.select(this)
-              .classed("word-hovered", true)
-              .transition(`mouseover-${text}`).duration(300).ease(d3.easeLinear)
-                .attr("font-size", size + 2)
-                .attr("font-weight", "bold");
-          }
-          
-          function handleMouseOut(d, i) {
-            d3.select(this)
-              .classed("word-hovered", false)
-              .interrupt(`mouseover-${text}`)
-                .attr("font-size", size);
-          }
-          
-          function handleClick(d, i) {
-            var e = d3.select(this);
-            var filterfun = e.text()
-              ? function (val) {
-                  // return new RegExp(e.text(), "i").test(val);
-                  return val;
-                }
-              : null;
-            console.log("Select: " + e.text());
-            _chart._dimension.filter(e.text());
-            // displaySelection.text(`selection="${e.text()}"`);
-            e.classed("word-selected", !e.classed("word-selected"));
-          }
-  
-      })
 
+        function handleMouseOver(d, i) {
+          d3.select(this)
+            .classed("word-hovered", true)
+            .transition(`mouseover-${text}`)
+            .duration(300)
+            .ease(d3.easeLinear)
+            .attr("font-size", size + 2)
+            .attr("font-weight", "bold");
+        }
+
+        function handleMouseOut(d, i) {
+          d3.select(this)
+            .classed("word-hovered", false)
+            .interrupt(`mouseover-${text}`)
+            .attr("font-size", size);
+        }
+
+        function handleClick(d, i) {
+          var e = d3.select(this);
+          var filterfun = e.text()
+            ? function (val) {
+                // return new RegExp(e.text(), "i").test(val);
+                return val;
+              }
+            : null;
+          console.log("Select: " + e.text());
+          _chart._dimension.filter(e.text());
+          // displaySelection.text(`selection="${e.text()}"`);
+          e.classed("word-selected", !e.classed("word-selected"));
+        }
+      })
 
       .on("end", draw);
 
@@ -205,9 +200,9 @@ dc.wordcloudChart = function (parent, chartGroup) {
     //     return false;
     //   })
     //   .style("font-family", _chart.font())
-    //   // .style("fill", function (d, i) {
-    //   //   return _fill(i);
-    //   // })
+    //   .style("fill", function (d, i) {
+    //     return _fill(i);
+    //   })
     //   .attr("text-anchor", "middle")
     //   .attr("transform", function (d) {
     //     return "translate(" + [d.x, d.y] + ")";
@@ -300,7 +295,7 @@ const wordCloudChartFunc = (divRef, ndx) => {
     // width: 410,
     minY: 0,
     minX: 0,
-    relativeSize: 12,
+    relativeSize: 5,
     dimension: wordDim,
     group: wordGroup,
     valueAccessor: function (d) {

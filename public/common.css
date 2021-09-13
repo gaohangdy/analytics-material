@@ -1,0 +1,221 @@
+/* header {
+  background-color: #252525 !important;
+  box-shadow: 0 0 0 1px #444, 0 0 0 2px #121212 !important;
+} */
+
+.MuiToolbar-regular {
+  min-height: 48px !important;
+}
+@media (min-width: 600px) {
+  .MuiToolbar-regular {
+    min-height: 48px !important;
+  }
+}
+
+.MuiCardHeader-root {
+  /* border-bottom: 1px solid #444 !important; */
+  /* background-color: #272727 !important;
+  color: #eee !important; */
+  padding: 0 16px !important;
+}
+
+.MuiCardHeader-action {
+  margin-top: 0 !important;
+  margin-right: 0 !important;
+}
+
+.MuiCardContent-root:last-child {
+  padding: 12px !important;
+}
+
+.MuiIconButton-root {
+  /* color: #eee !important; */
+  padding: 5px !important;
+}
+
+.MuiTypography-h5 {
+  font-size: 1rem !important;
+  font-weight: 550 !important;
+}
+
+.search-panel {
+  display: flex;
+  align-items: end;
+}
+
+.search-panel .MuiFormControl-marginNormal {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+.MuiCardContent-root {
+  width: 100%;
+  height: calc(100% - 35px);
+}
+
+.float-right {
+  display: flex;
+  justify-content: right;
+  align-items: center;
+  padding-right: 10px;
+  padding-bottom: 5px;
+}
+
+/* Chart Styles */
+body .dc-chart.coordinate-chart .node text,
+body .chart-type-row svg .row text {
+  fill: #eee !important;
+  stroke-width: 2px;
+  stroke: black;
+  paint-order: stroke;
+  stroke-opacity: 0.3;
+}
+
+.dc-chart {
+  display: flex;
+  justify-content: center;
+}
+
+.dc-chart td {
+  padding: 10px 0;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+}
+
+.chart-type-pie {
+  width: 100%;
+  height: 100%;
+}
+
+.chart-type-row {
+  width: 100%;
+  height: 100%;
+}
+
+.chart-type-table {
+  overflow: auto;
+  height: 486px;
+  /* height: calc(100vh - 186px); */
+  padding-right: 8px;
+  margin: -12px -12px -12px 0;
+}
+
+.chart-type-table::-webkit-scrollbar {
+  /*滚动条整体样式*/
+  width: 10px; /*高宽分别对应横竖滚动条的尺寸*/
+  height: 1px;
+}
+.chart-type-table::-webkit-scrollbar-thumb {
+  /*滚动条里面小方块*/
+  border-radius: 10px;
+  box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.2);
+  background: #535353;
+}
+.chart-type-table::-webkit-scrollbar-track {
+  /*滚动条里面轨道*/
+  box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.2);
+  border-radius: 10px;
+  background: #ededed;
+}
+
+/* d3-cloud style */
+.word-default {
+  fill: cadetblue;
+  font-weight: normal;
+}
+
+.word-hovered {
+  fill: teal;
+  font-weight: bold;
+}
+
+.word-selected {
+  fill: darkslategrey;
+  font-weight: bold;
+}
+
+.click-only-text {
+  cursor: pointer;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+/* toolbar for control charts */
+/* .MuiToggleButtonGroup-root .MuiToggleButton-root {
+  background-color: #848282 !important;
+} */
+
+/* .MuiToggleButtonGroup-root .MuiToggleButton-root.Mui-selected {
+  background-color: #536DFE !important;
+}
+
+.MuiToggleButton-sizeSmall {
+  padding: 2px !important;
+} */
+
+
+/* Loading frame */
+.loader {
+  position: relative;
+  width: 2.5em;
+  height: 2.5em;
+  transform: rotate(165deg);
+}
+.loader:before, .loader:after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  display: block;
+  width: 0.5em;
+  height: 0.5em;
+  border-radius: 0.25em;
+  transform: translate(-50%, -50%);
+}
+.loader:before {
+  animation: before 2s infinite;
+}
+.loader:after {
+  animation: after 2s infinite;
+}
+
+@keyframes before {
+  0% {
+    width: 0.5em;
+    box-shadow: 1em -0.5em rgba(225, 20, 98, 0.75), -1em 0.5em rgba(111, 202, 220, 0.75);
+  }
+  35% {
+    width: 2.5em;
+    box-shadow: 0 -0.5em rgba(225, 20, 98, 0.75), 0 0.5em rgba(111, 202, 220, 0.75);
+  }
+  70% {
+    width: 0.5em;
+    box-shadow: -1em -0.5em rgba(225, 20, 98, 0.75), 1em 0.5em rgba(111, 202, 220, 0.75);
+  }
+  100% {
+    box-shadow: 1em -0.5em rgba(225, 20, 98, 0.75), -1em 0.5em rgba(111, 202, 220, 0.75);
+  }
+}
+@keyframes after {
+  0% {
+    height: 0.5em;
+    box-shadow: 0.5em 1em rgba(61, 184, 143, 0.75), -0.5em -1em rgba(233, 169, 32, 0.75);
+  }
+  35% {
+    height: 2.5em;
+    box-shadow: 0.5em 0 rgba(61, 184, 143, 0.75), -0.5em 0 rgba(233, 169, 32, 0.75);
+  }
+  70% {
+    height: 0.5em;
+    box-shadow: 0.5em -1em rgba(61, 184, 143, 0.75), -0.5em 1em rgba(233, 169, 32, 0.75);
+  }
+  100% {
+    box-shadow: 0.5em 1em rgba(61, 184, 143, 0.75), -0.5em -1em rgba(233, 169, 32, 0.75);
+  }
+}
+.loader {
+  position: absolute;
+  top: calc(50% - 1.25em);
+  left: calc(50% - 1.25em);
+}

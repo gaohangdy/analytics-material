@@ -8,7 +8,8 @@ export default makeStyles(theme => ({
   },
   content: {
     flexGrow: 1,
-    padding: theme.spacing(3),
+    // padding: theme.spacing(3),
+    padding: '50px 12px 24px 12px',
     width: `calc(100vw - 240px)`,
     minHeight: "100vh",
   },

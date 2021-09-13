@@ -16,6 +16,8 @@ import RefreshIcon from "@material-ui/icons/Refresh";
 const useStyles = makeStyles((theme) => ({
   root: {
     // maxWidth: 345,
+    width: "100%",
+    height: "100%",   
   },
   // header: {
   //   paddingLeft: 16,
@@ -70,5 +72,6 @@ export const ChartTemplate = (props) => {
         <div ref={div} class={props.chartType} />
       </CardContent>
     </Card>
+    // <div ref={div} class={props.chartType} />
   );
 };

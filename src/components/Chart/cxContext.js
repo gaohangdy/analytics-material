@@ -14,24 +14,27 @@ export class DataContext extends React.Component {
     this.state = { loading: false, hasNDX: false };
   }
 
-  componentDidMount() {
-    if (this.state.hasNDX) {
-      return;
-    }
+  queryData(startDate, endDate) {
+    console.log("Execute queryData method.");
+
+    const queryDateFormat = timeFormat("%Y-%m-%dT%H:%M:%SZ");
+    // 2021-04-25T00:00:00Z
+    const strStartDate = queryDateFormat(startDate);
+    const strEndDate = queryDateFormat(endDate);
+
+    // if (this.state.hasNDX) {
+    //   return;
+    // }
     if (this.state.loading) {
       return;
     }
     this.setState({ loading: true });
 
     json(
-      "./testdata.json",
-      // "http://35.200.126.162:8888/pac/v1/search/home/contents?start_date=2021-04-25T00:00:00Z&&end_date=2021-07-28T00:00:00Z",
+      // "./testdata.json",
+      "http://35.200.126.162:8888/pac/v1/search/home/contents?start_date=" + strStartDate + "&&end_date=" + strEndDate,
       {
         method: "GET",
-        // body: JSON.stringify({
-        //   start_date: "2021-04-25T00:00:00Z",
-        //   end_date: "2021-07-21T00:00:00Z"
-        // }),
         headers: {
           'Accept': 'application/json',
           "Content-type": "application/json; charset=UTF-8",
@@ -47,8 +50,14 @@ export class DataContext extends React.Component {
           d.dd = dateFormatParser(shortDate);
           d.month = timeMonth(d.dd); // pre-calculate month for better performance
           d.week = timeWeek(d.dd);
-          // d.close = +d.close; // coerce to number
-          // d.open = +d.open;
+
+          if(d.sentiment.toUpperCase() === "POSITIVE") {
+            d.ctype = 0;
+          } else if (d.sentiment.toUpperCase() === "NEGATIVE") {
+            d.ctype = 1;
+          } else {
+            d.ctype = 2;
+          }
         });
 
 
@@ -58,21 +67,36 @@ export class DataContext extends React.Component {
       } else {
         this.setState({ loading: false, hasNDX: false });
       }
-    });
+    });    
+
+  }
+
+  componentDidMount() {
+    const dateParse = timeParse("%Y-%m-%dT%H:%M:%SZ");
+    const startDate=dateParse("2021-04-25T00:00:00Z");
+    const endDate=dateParse("2021-07-28T00:00:00Z");
+
+    this.queryData(startDate, endDate);
   }
 
   render() {
     if (!this.state.hasNDX) {
       return null;
     }
+    if (this.state.loading) {
+      return <div className="loader" />;
+    }
     return (
+      <>
       <CXContext.Provider value={{ ndx: this.ndx }}>
         <div ref={this.parent}>{this.props.children}</div>
       </CXContext.Provider>
+      </>
     );
   }
 }
 
+// Will be remove
 function formatApiResult(resultApi) {
   const formatedList = [];
   resultApi.forEach((item) => {

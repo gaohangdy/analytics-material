@@ -32,6 +32,7 @@ import Tables from "../../pages/tables";
 import Icons from "../../pages/icons";
 import Charts from "../../pages/charts";
 import CloudDashboard from "../../pages/clouddashboard";
+import Customer from "../../pages/newdashboard/customer";
 
 // context
 import { useLayoutState } from "../../context/LayoutContext";
@@ -52,8 +53,9 @@ function Layout(props) {
               [classes.contentShift]: layoutState.isSidebarOpened,
             })}
           >
-            <div className={classes.fakeToolbar} />
+            {/* <div className={classes.fakeToolbar} /> */}
             <Switch>
+              <Route path="/app/customer" component={Customer} />
               <Route path="/app/cloud" component={CloudDashboard} />
               <Route path="/app/dashboard" component={Dashboard} />
               <Route path="/app/typography" component={Typography} />
@@ -68,7 +70,7 @@ function Layout(props) {
               <Route path="/app/ui/icons" component={Icons} />
               <Route path="/app/ui/charts" component={Charts} />
             </Switch>
-            <Box
+            {/* <Box
               mt={5}
               width={"100%"}
               display={"flex"}
@@ -142,7 +144,7 @@ function Layout(props) {
                   </IconButton>
                 </Link>
               </div>
-            </Box>
+            </Box> */}
           </div>
         </>
     </div>

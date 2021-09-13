@@ -17,16 +17,10 @@ import { CloudSearchWidget } from "../../components/Chart/cloudSearchWidget";
 import { CloudMonthlyBarChart } from "../../components/Chart/cloudMonthlyBarChart";
 
 import Button from "@material-ui/core/Button";
-import Icon from "@material-ui/core/Icon";
-import CloudUploadIcon from "@material-ui/icons/CloudUpload";
-import Card from "@material-ui/core/Card";
-import CardContent from "@material-ui/core/CardContent";
-
-import Grid from "@material-ui/core/Grid";
+import SearchIcon from '@material-ui/icons/Search';
 import DateFnsUtils from "@date-io/date-fns";
 import {
   MuiPickersUtilsProvider,
-  KeyboardTimePicker,
   KeyboardDatePicker,
 } from "@material-ui/pickers";
 
@@ -35,62 +29,60 @@ export default function CloudDashboard(props) {
   var theme = useTheme();
 
   // local
-  var [mainChartState, setMainChartState] = useState("monthly");
-  const [startdDate, setStartDate] = React.useState(
+  const [selectedDate, setSelectedDate] = useState(
     new Date("2014-08-18T21:11:54"),
   );
-  const [endDate, setEndDate] = React.useState(new Date("2014-08-18T21:11:54"));
+
+  const handleDateChange = (date) => {
+    setSelectedDate(date);
+  };
 
   return (
     <>
-      {/* <PageTitle title="Cloud Analytics" button={<Button
-      variant="contained"
-      size="medium"
-      color="secondary"
-    >
-        Latest Reports
-    </Button>} /> */}
-      <Row>
-        <Card className={classes.root}>
-          <CardContent className={classes.content}>
-            <MuiPickersUtilsProvider utils={DateFnsUtils}>
-                <KeyboardDatePicker
-                  disableToolbar
-                  variant="inline"
-                  format="MM/dd/yyyy"
-                  margin="normal"
-                  id="date-picker-inline"
-                  label="Start Date"
-                  value={startdDate}
-                  // onChange={handleDateChange}
-                  KeyboardButtonProps={{
-                    "aria-label": "change date",
-                  }}
-                />
-                <KeyboardDatePicker
-                  margin="normal"
-                  id="date-picker-dialog"
-                  label="End Date"
-                  format="MM/dd/yyyy"
-                  // value={selectedDate}
-                  onChange={endDate}
-                  KeyboardButtonProps={{
-                    "aria-label": "change date",
-                  }}
-                />
-                <Button
-                  variant="contained"
-                  color="primary"
-                  size="medium"
-                  className={classes.button}
-                  endIcon={<CloudUploadIcon />}
-                >
-                  Send
-                </Button>
-            </MuiPickersUtilsProvider>
-          </CardContent>
-        </Card>
-      </Row>
+      <PageTitle
+        title="Cloud Dashboard"
+        button={
+          <MuiPickersUtilsProvider utils={DateFnsUtils}>
+            <div class="search-panel">
+              <KeyboardDatePicker
+                margin="normal"
+                id="date-picker-start"
+                label="Start Date"
+                format="yyyy/MM/dd"
+                value={selectedDate}
+                onChange={handleDateChange}
+                KeyboardButtonProps={{
+                  "aria-label": "change date",
+                }}
+              />
+              <span style={{ width: 32 }}></span>
+              <KeyboardDatePicker
+                margin="normal"
+                id="date-picker-end"
+                label="End Date"
+                format="yyyy/MM/dd"
+                value={selectedDate}
+                onChange={handleDateChange}
+                KeyboardButtonProps={{
+                  "aria-label": "change date",
+                }}
+              />
+              <span style={{ width: 12 }}></span>
+              <Button
+                variant="contained"
+                color="primary"
+                size="medium"
+                startIcon={<SearchIcon />}
+              >
+                Search
+              </Button>
+            </div>
+          </MuiPickersUtilsProvider>
+          // <Button variant="contained" size="medium" color="secondary">
+          //   Latest Reports
+          // </Button>
+        }
+      />
       <DataContext>
         <Row>
           <Col md={8}>

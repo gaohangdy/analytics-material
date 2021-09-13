@@ -1,5 +1,5 @@
 import React from "react";
-import { WidgetTemplate } from "./widgetTemplate";
+import { ChartTemplate } from "./chartTemplate";
 import { customSearch } from "./custom-search";
 
 const gainOrLossChartFunc = (divRef, ndx) => {
@@ -14,5 +14,5 @@ const gainOrLossChartFunc = (divRef, ndx) => {
 };
 
 export const CloudSearchWidget = (props) => (
-  <WidgetTemplate chartFunction={gainOrLossChartFunc} />
+  <ChartTemplate chartFunction={gainOrLossChartFunc} title="コンテンツ" />
 );
