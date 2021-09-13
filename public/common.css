@@ -71,6 +71,14 @@ body .chart-type-row svg .row text {
   stroke-opacity: 0.3;
 }
 
+body .pie-label-group text {
+  fill: #eee !important;
+  stroke-width: 2px;
+  stroke: black;
+  paint-order: stroke;
+  stroke-opacity: 0.3;  
+}
+
 .dc-chart {
   display: flex;
   justify-content: center;

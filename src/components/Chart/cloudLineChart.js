@@ -29,7 +29,7 @@ const moveChartFunc = (divRef, ndx) => {
       return new dc.LineChart(c).curve(curveCardinal);
     })
     // .x(d3.scaleLinear().domain([0,20]))
-    .x(scaleTime().domain([new Date(2021, 6, 1), new Date(2021, 6, 30)]))
+    .x(scaleTime().domain([new Date(2021, 6, 20), new Date(2021, 7, 20)]))
     .round(timeWeeks.round)
     .xUnits(timeWeeks)
     .brushOn(false)

@@ -18,7 +18,6 @@ export class DataContext extends React.Component {
     console.log("Execute queryData method.");
 
     const queryDateFormat = timeFormat("%Y-%m-%dT%H:%M:%SZ");
-    // 2021-04-25T00:00:00Z
     const strStartDate = queryDateFormat(startDate);
     const strEndDate = queryDateFormat(endDate);
 
@@ -31,8 +30,8 @@ export class DataContext extends React.Component {
     this.setState({ loading: true });
 
     json(
-      // "./testdata.json",
-      "http://35.200.126.162:8888/pac/v1/search/home/contents?start_date=" + strStartDate + "&&end_date=" + strEndDate,
+      "./testdata.json",
+      // "http://35.200.126.162:8888/pac/v1/search/home/contents?start_date=" + strStartDate + "&&end_date=" + strEndDate,
       {
         method: "GET",
         headers: {
@@ -73,8 +72,8 @@ export class DataContext extends React.Component {
 
   componentDidMount() {
     const dateParse = timeParse("%Y-%m-%dT%H:%M:%SZ");
-    const startDate=dateParse("2021-04-25T00:00:00Z");
-    const endDate=dateParse("2021-07-28T00:00:00Z");
+    const startDate=dateParse("2021-07-20T04:30:39Z");
+    const endDate=dateParse("2021-08-20T23:45:31Z");
 
     this.queryData(startDate, endDate);
   }

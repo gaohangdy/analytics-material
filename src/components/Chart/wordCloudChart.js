@@ -62,6 +62,8 @@ dc.wordcloudChart = function (parent, chartGroup) {
         key: key,
         title: title,
         fill: _fill(i),
+        x: d.x,
+        y: d.y,
       };
 
       return result;
@@ -94,6 +96,7 @@ dc.wordcloudChart = function (parent, chartGroup) {
         _g.append("text")
           .attr("font-size", size)
           // .attr("font-size", "12px")
+          .attr("text-anchor", "middle")
           .attr("transform", `translate(${x},${y}) rotate(${rotate})`)
           .text(text)
           // .classed("click-only-text", true)

@@ -48,10 +48,10 @@ export default function Customer(props) {
 
   // local
   const [startDate, setStartDate] = useState(
-    new Date("2021-04-25T00:00:00Z"),
+    new Date("2021-07-20T00:00:00Z"),
   );
   const [endDate, setEndDate] = useState(
-    new Date("2021-07-28T00:00:00Z"),
+    new Date("2021-08-20T00:00:00Z"),
   );
 
   const handleStartDateChange = (date) => {
