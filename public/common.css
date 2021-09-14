@@ -156,11 +156,11 @@ body .pie-label-group text {
 
 /* .MuiToggleButtonGroup-root .MuiToggleButton-root.Mui-selected {
   background-color: #536DFE !important;
-}
+} */
 
 .MuiToggleButton-sizeSmall {
-  padding: 2px !important;
-} */
+  padding: 0 !important;
+}
 
 
 /* Loading frame */

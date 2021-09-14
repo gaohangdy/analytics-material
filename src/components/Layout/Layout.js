@@ -32,7 +32,15 @@ import Tables from "../../pages/tables";
 import Icons from "../../pages/icons";
 import Charts from "../../pages/charts";
 import CloudDashboard from "../../pages/clouddashboard";
+
 import Customer from "../../pages/newdashboard/customer";
+import Store from "../../pages/newdashboard/store";
+import Product from "../../pages/newdashboard/product";
+import Sales from "../../pages/newdashboard/sales";
+import History from "../../pages/newdashboard/history";
+import Customize from "../../pages/newdashboard/customize";
+import Dictionary from "../../pages/newdashboard/dictionary";
+import Keywords from "../../pages/newdashboard/keywords";
 
 // context
 import { useLayoutState } from "../../context/LayoutContext";
@@ -56,6 +64,16 @@ function Layout(props) {
             {/* <div className={classes.fakeToolbar} /> */}
             <Switch>
               <Route path="/app/customer" component={Customer} />
+              <Route path="/app/store" component={Store} />
+              <Route path="/app/product" component={Product} />
+              <Route path="/app/sales" component={Sales} />
+              <Route path="/app/history" component={History} />
+              <Route path="/app/customize" component={Customize} />
+              <Route path="/app/dictionary" component={Dictionary} />
+              <Route path="/app/keywords" component={Keywords} />
+
+
+
               <Route path="/app/cloud" component={CloudDashboard} />
               <Route path="/app/dashboard" component={Dashboard} />
               <Route path="/app/typography" component={Typography} />

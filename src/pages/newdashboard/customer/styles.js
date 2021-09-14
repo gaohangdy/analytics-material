@@ -133,7 +133,7 @@ export default makeStyles(theme => ({
 
   toggleContainer: {
     display: "flex",
-    justifyContent: "center",
+    // justifyContent: "center",
     paddingBottom: 10,
     marginTop: -15,
   }
