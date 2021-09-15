@@ -135,6 +135,7 @@ export default makeStyles(theme => ({
     display: "flex",
     // justifyContent: "center",
     paddingBottom: 10,
-    marginTop: -15,
+    marginTop: -75,
+    paddingLeft: 200,
   }
 }));

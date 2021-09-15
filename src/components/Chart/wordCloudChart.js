@@ -2,6 +2,7 @@ import React from "react";
 import * as dc from "dc";
 import * as d3 from "d3";
 import cloud from "d3-cloud";
+import { timeFormat } from "d3";
 import { ChartTemplate } from "./chartTemplate";
 
 dc.wordcloudChart = function (parent, chartGroup) {
@@ -287,12 +288,13 @@ dc.wordcloudChart = function (parent, chartGroup) {
 
 const wordCloudChartFunc = (divRef, ndx) => {
   const wordcloudChart = dc.wordcloudChart(divRef);
-
+  const queryDateFormat = timeFormat("%Y-%m-%dT%H:%M:%SZ");
+  console.log("Dimension Start: " + queryDateFormat(new Date()));
   const wordDim = ndx.dimension((d) => d.word_list, true);
 
   // const wordGroup = wordDim.group().reduceSum((d) => d.value);
-  const wordGroup = wordDim.group();
-
+  const wordGroup = wordDim.group().reduceCount();
+  console.log("Dimension End: " + queryDateFormat(new Date()));
   wordcloudChart.options({
     // height: 350,
     // width: 410,

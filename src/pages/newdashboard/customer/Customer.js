@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState } from "react";
 import { useTheme } from "@material-ui/styles";
 
 // styles
@@ -37,7 +37,7 @@ import BarIcon from "../../icons/charts/bar";
 
 export default function Customer(props) {
   var classes = useStyles();
-  var theme = useTheme();
+  // var theme = useTheme();
 
   const searchContext = React.useRef();
 
@@ -48,7 +48,7 @@ export default function Customer(props) {
 
   // local
   const [startDate, setStartDate] = useState(
-    new Date("2021-07-20T00:00:00Z"),
+    new Date("2021-08-10T00:00:00Z"),
   );
   const [endDate, setEndDate] = useState(
     new Date("2021-08-20T00:00:00Z"),

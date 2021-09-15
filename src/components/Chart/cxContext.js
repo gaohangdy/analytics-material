@@ -29,6 +29,7 @@ export class DataContext extends React.Component {
     }
     this.setState({ loading: true });
 
+    console.log("Request data: " + queryDateFormat(new Date()));
     json(
       "./testdata.json",
       // "http://35.200.126.162:8888/pac/v1/search/home/contents?start_date=" + strStartDate + "&&end_date=" + strEndDate,
@@ -40,7 +41,7 @@ export class DataContext extends React.Component {
         },
       }
     ).then((result) => {
-      console.log(result);
+      console.log("Recieve data: " + queryDateFormat(new Date()));
       console.log("Total: " + result.contents.length);
       if (result.status_code === "200") {
 
@@ -62,6 +63,8 @@ export class DataContext extends React.Component {
 
         // this.ndx = crossfilter(formatApiResult(result.contents)); //TODO possibly need to update this
         this.ndx = crossfilter(result.contents);
+
+        console.log("SetCross data: " + queryDateFormat(new Date()));
         this.setState({ loading: false, hasNDX: true });
       } else {
         this.setState({ loading: false, hasNDX: false });
@@ -82,88 +85,13 @@ export class DataContext extends React.Component {
     if (!this.state.hasNDX) {
       return null;
     }
-    if (this.state.loading) {
-      return <div className="loader" />;
-    }
+    // if (this.state.loading) {
+    //   return <div className="loader" />;
+    // }
     return (
-      <>
       <CXContext.Provider value={{ ndx: this.ndx }}>
         <div ref={this.parent}>{this.props.children}</div>
       </CXContext.Provider>
-      </>
     );
   }
-}
-
-// Will be remove
-function formatApiResult(resultApi) {
-  const formatedList = [];
-  resultApi.forEach((item) => {
-    if (item.label_codes.length > 0) {
-      item.label_codes.forEach((labelItem) => {
-        if (item.word_list.length > 0) {
-          item.word_list.forEach((wordItem) => {
-            const vocContent = {
-              content: item.content,
-              content_id: item.content_id,
-              item_code: item.item_code,
-              language_code: item.language_code,
-              original: item.original,
-              sentiment: item.sentiment,
-              publish_timestamp: item.publish_timestamp,
-              label_code: labelItem,
-              word_list: wordItem,
-            };
-
-            formatedList.push(vocContent);
-          });
-        } else {
-          const vocContent = {
-            content: item.content,
-            content_id: item.content_id,
-            item_code: item.item_code,
-            language_code: item.language_code,
-            original: item.original,
-            sentiment: item.sentiment,
-            publish_timestamp: item.publish_timestamp,
-            label_code: labelItem,
-            word_list: '',
-          };
-
-          formatedList.push(vocContent);
-        }
-      });
-    } else if (item.word_list.length > 0) {
-      item.word_list.forEach((wordItem) => {
-        const vocContent = {
-          content: item.content,
-          content_id: item.content_id,
-          item_code: item.item_code,
-          language_code: item.language_code,
-          original: item.original,
-          sentiment: item.sentiment,
-          publish_timestamp: item.publish_timestamp,
-          label_code: '',
-          word_list: wordItem,
-        };
-
-        formatedList.push(vocContent);
-      });
-    } else {
-      const vocContent = {
-        content: item.content,
-        content_id: item.content_id,
-        item_code: item.item_code,
-        language_code: item.language_code,
-        original: item.original,
-        sentiment: item.sentiment,
-        publish_timestamp: item.publish_timestamp,
-        label_code: '',
-        word_list: '',
-      };
-
-      formatedList.push(vocContent);
-    }
-  });    
-  return formatedList;
 }
