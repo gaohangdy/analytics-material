@@ -49,7 +49,8 @@ dc.wordcloudChart = function (parent, chartGroup) {
     var groups = _chart
       ._computeOrderedGroups(_chart.data())
       .filter(function (d) {
-        return _chart.valueAccessor()(d) !== 0;
+        // return _chart.valueAccessor()(d) !== 0;
+        return _chart.valueAccessor()(d) > 10;
       });
 
     var data = groups.map(function (d, i) {
@@ -293,7 +294,8 @@ const wordCloudChartFunc = (divRef, ndx) => {
   const wordDim = ndx.dimension((d) => d.word_list, true);
 
   // const wordGroup = wordDim.group().reduceSum((d) => d.value);
-  const wordGroup = wordDim.group().reduceCount();
+  const wordDim1 = wordDim.filter("着る");
+  const wordGroup = wordDim1.group().reduceCount();
   console.log("Dimension End: " + queryDateFormat(new Date()));
   wordcloudChart.options({
     // height: 350,
