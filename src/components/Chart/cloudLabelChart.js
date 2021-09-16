@@ -14,6 +14,8 @@ const cloudLabelFunc = (divRef, ndx) => {
   }, true);
   const group = dimension.group();
   dayOfWeekChart
+  .width(divRef.parentElement.offsetWidth - 24)
+  .height(divRef.parentElement.offsetHeight - 24)
   .dimension(dimension)
   .group(group)
   .colors(d3.scaleOrdinal().range(['#1f77b4','#2ca02c','#ff7f0e']));

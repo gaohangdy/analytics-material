@@ -81,7 +81,7 @@ export default function Product(props) {
 
   return (
     <>
-      <PageTitle title="店舗の声" button={
+      <PageTitle title="新商品提案" button={
         <Button
           variant="contained"
           size="medium"

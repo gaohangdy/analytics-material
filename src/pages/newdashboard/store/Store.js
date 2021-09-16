@@ -136,7 +136,7 @@ export default function Store(props) {
   return (
     <>
       <PageTitle
-        title="顧客の声"
+        title="店舗の声"
         button={
           <MuiPickersUtilsProvider utils={DateFnsUtils}>
             <div class="search-panel">

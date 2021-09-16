@@ -5,7 +5,7 @@ import { useTheme } from "@material-ui/styles";
 import useStyles from "./styles";
 
 // components
-import GridLayout from "react-grid-layout";
+import { GridLayout, Responsive, WidthProvider } from "react-grid-layout";
 import PageTitle from "../../../components/PageTitle";
 import { DataContext } from "../../../components/Chart/cxContext";
 import { CloudPieChart } from "../../../components/Chart/cloudPieChart";
@@ -35,9 +35,11 @@ import LineIcon from "../../icons/charts/line";
 import WordCloudIcon from "../../icons/charts/word";
 import BarIcon from "../../icons/charts/bar";
 
+const ResponsiveGridLayout = WidthProvider(Responsive);
+
 export default function Customer(props) {
   var classes = useStyles();
-  // var theme = useTheme();
+  var theme = useTheme();
 
   const searchContext = React.useRef();
 
@@ -118,6 +120,44 @@ export default function Customer(props) {
   const [gridWidthDashboard, setGridWidthDashboard] = useState(
     window.innerWidth - 276,
   ); // [Grid Layout]
+
+  var windowWidth = window.innerWidth;
+  var breakpointWidth = theme.breakpoints.values.md;
+  var isSmallScreen = windowWidth < breakpointWidth;
+  
+  const initLayoutPC = [
+    { x: 0, y: 0, w: 6, h: 6 },
+    { x: 6, y: 0, w: 6, h: 6 }, //, minW: 2, maxW: 4
+    { x: 0, y: 6, w: 12, h: 12 },
+    { x: 12, y: 6, w: 12, h: 6 },
+    { x: 12, y: 6, w: 12, h: 12 },
+  ]; 
+  
+  const initLayoutSP = [
+    { x: 0, y: 0, w: 24, h: 6 },
+    { x: 0, y: 6, w: 24, h: 6 }, //, minW: 2, maxW: 4
+    { x: 0, y: 12, w: 24, h: 12 },
+    { x: 0, y: 24, w: 24, h: 6 },
+    { x: 0, y: 30, w: 24, h: 12 },
+  ]; 
+
+  const layoutPC = [
+    { i: "pie", x: 0, y: 0, w: 6, h: 6 },
+    { i: "bar", x: 6, y: 0, w: 6, h: 6 }, //, minW: 2, maxW: 4
+    { i: "word", x: 0, y: 6, w: 12, h: 12 },
+    { i: "line", x: 12, y: 6, w: 12, h: 6 },
+    { i: "table", x: 12, y: 6, w: 12, h: 12 },
+  ];
+
+  const layoutSP = [
+    { i: "pie", x: 0, y: 0, w: 24, h: 6 },
+    { i: "bar", x: 0, y: 6, w: 24, h: 6 }, //, minW: 2, maxW: 4
+    { i: "word", x: 0, y: 12, w: 24, h: 12 },
+    { i: "line", x: 0, y: 24, w: 24, h: 6 },
+    { i: "table", x: 0, y: 30, w: 24, h: 12 },
+  ];
+    // {lg: layout1, md: layout2, ...}
+    const layouts = {lg: layoutPC, sm: layoutSP};
   // layout is an array of objects, see the demo for more complete usage
   const layout = [
     { i: "pie", x: 0, y: 0, w: 6, h: 6 },
@@ -205,39 +245,42 @@ export default function Customer(props) {
           </div>
         </Grid>
 
-        <GridLayout
+        {/* <GridLayout
           className="layout"
           layout={layout}
           cols={24}
           rowHeight={rowHeight}
           width={gridWidthDashboard}
-        >
+        > */}
+      <ResponsiveGridLayout className="layout" layouts={layouts}
+        breakpoints={{lg: 1200, sm: 768}}
+        rowHeight={rowHeight}
+        cols={{lg: 24, sm: 24}}>      
           {showPie && (
-            <div key="pie" data-grid={{ x: 0, y: 0, w: 6, h: 6 }}>
+            <div key="pie" data-grid={isSmallScreen ? initLayoutSP[0] : initLayoutPC[0]}>
               <CloudPieChart />
             </div>
           )}
           {showBar && (
             <div
               key="bar"
-              style={{ display: showBar ? "block" : "none" }}
-              data-grid={{ x: 6, y: 0, w: 6, h: 6 }}
+              data-grid={isSmallScreen ? initLayoutSP[1] : initLayoutPC[1]}
             >
               <CloudLabelChart />
             </div>
           )}
           {showWord && (
-            <div key="word" data-grid={{ x: 0, y: 6, w: 12, h: 12 }}>
+            <div key="word"  data-grid={isSmallScreen ? initLayoutSP[2] : initLayoutPC[2]}>
               <WordCloudChart />
             </div>
           )}
           {showLine && (
-            <div key="line" data-grid={{ x: 12, y: 6, w: 12, h: 6 }}>
+            <div key="line"  data-grid={isSmallScreen ? initLayoutSP[3] : initLayoutPC[3]}>
               <CloudLineChart />
             </div>
           )}
           {showTable && (
-            <div key="table" data-grid={{ x: 12, y: 6, w: 12, h: 12 }}>
+            <div key="table"  data-grid={isSmallScreen ? initLayoutSP[4] : initLayoutPC[4]}>
               <form style={{ marginBottom: "5px" }}>
                 <CloudSearchWidget />
               </form>
@@ -255,7 +298,8 @@ export default function Customer(props) {
               <CloudContentTable />
             </div>
           )}
-        </GridLayout>
+        {/* </GridLayout> */}
+        </ResponsiveGridLayout>  
       </DataContext>
     </>
   );

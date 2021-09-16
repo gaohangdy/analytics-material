@@ -137,5 +137,10 @@ export default makeStyles(theme => ({
     paddingBottom: 10,
     marginTop: -75,
     paddingLeft: 200,
+    "@media (max-width: 768px)": {
+      paddingLeft: 0,
+      justifyContent: "center",      
+      marginTop: -15,
+    }    
   }
 }));
